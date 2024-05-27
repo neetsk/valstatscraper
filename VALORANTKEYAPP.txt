@@ -1,0 +1,5 @@
+This application will be used as a match scraper for Valorant tournament games using the ACCOUNT-V1 and VAL-MATCH-v1 endpoints.  
+Our extended friend group has grown to 30-40 players of all ranks and a tournament every few months allows us to connect outside of a ranked setting as well as play with familiar competition. 
+These tournaments in the past and as of now do not have a prize pool and simply give the winners bragging rights in our group. 
+The app will use Flask as the backend to connect to the API and deploy the server while displaying the data in a cleaner format using HTML, JS, and CSS. 
+The backend will include SQLite as our DBMS to store past, present, and future tournament data. 

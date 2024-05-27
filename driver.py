@@ -2,10 +2,10 @@ from flask import Flask, url_for, request, render_template, redirect, abort
 from markupsafe import escape
 import requests
 from secretkey import myToken
+from endpoints import *
 
 app = Flask((__name__))
 
-RIOTAPIAUTHENTICATE = "https://developer.riotgames.com/apis#account-v1/GET_getByAccessToken"
 
 @app.route("/")
 def index():
@@ -23,6 +23,21 @@ def mainPage():
         return "SUCCESS"
     else:
         return "FAILED with ", response.status_code
+
+'''Get PUUID with Name + Tag'''
+@app.route("/puuid/<name>/<tag>")
+def getPUUID(name, tag):
+    apiParams = {
+        "api_key": myToken
+    }
+
+    response = requests.get(RIOTAPI_ACCOUNTS_BY_RIOT_ID + name + "/" + tag, params=apiParams)
+
+    if response.status_code == 200:
+        return response.json()['puuid']
+    else:
+        return "FAILED with ", response.status_code
+
 
 @app.route("/<match>")
 def showMatchStats(myMatch):
