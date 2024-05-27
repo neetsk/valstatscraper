@@ -2,6 +2,9 @@ from flask import Flask
 
 app = Flask((__name__))
 
-@app.route("/")
+@app.route("/members")
 def mainPage():
-    return "<p>First, Page</p>"
+    return {"Members": ["Member1, Member2, Member3"]}
+
+if __name__ == "__main__":
+    app.run(debug=True)
