@@ -5,31 +5,24 @@ from secretkey import myToken
 
 app = Flask((__name__))
 
-RIOTAPIAUTHENTICATE = "https://na.api.riotgames.com/val/status/v1/platform-data"
+RIOTAPIAUTHENTICATE = "https://developer.riotgames.com/apis#account-v1/GET_getByAccessToken"
 
 @app.route("/")
 def index():
-    return redirect(url_for("auth"))
+    return redirect(url_for("mainPage"))
 
 @app.route("/auth")
 def mainPage():
     apiAuthHeader = {
-        "api_key": myToken
+        "Authorization": myToken
     }
+
     response = requests.get(RIOTAPIAUTHENTICATE, headers=apiAuthHeader)
 
     if response.status_code == 200:
-        print(response.json())
         return "SUCCESS"
     else:
-        return "FAILED"
-    '''
-    if True:
-        return redirect(url_for(addTeam))
-    if True:
-        abort(404) #runs a 404
-    return "hi"
-    '''
+        return "FAILED with ", response.status_code
 
 @app.route("/<match>")
 def showMatchStats(myMatch):
